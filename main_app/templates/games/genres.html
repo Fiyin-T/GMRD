@@ -4,7 +4,9 @@
 {{genres}}
 
 {% for genre in genres %}
-    <img src="{{ genre.image_background }}" alt="">
+    <a href="">
+        <img src="{{ genre.image_background }}" alt="">
+    </a>
     {{ genre.id }}
     {{ genre.name }}
     {{ genre.slug }}
