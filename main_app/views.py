@@ -3,7 +3,6 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-import requests, os, environ
 from . models import List, Game
 import requests, os
 from datetime import datetime
