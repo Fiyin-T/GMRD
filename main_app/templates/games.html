@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{{genres}}
+
+{% for genre in genres %}
+    <img src="{{ genre.image_background }}" alt="">
+    {{ genre.id }}
+    {{ genre.name }}
+    {{ genre.slug }}
+    {{ genre.games_count }}
+    {{ genre.games }}
+
+    <br> <br>
+{% endfor %}
+
+
+
+{% endblock %}
