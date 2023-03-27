@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-class Video_Game(models.Model):
+class Game(models.Model):
     title = models.CharField(max_length=100)
     description = models.CharField(max_length=250)
 
@@ -20,4 +20,4 @@ class List(models.Model):
     # ForeignKey
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     # M:M relationship
-    video_game = models.ManyToManyField(Video_Game)
+    game = models.ManyToManyField(Game)

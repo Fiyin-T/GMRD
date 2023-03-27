@@ -3,6 +3,8 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+import requests, os, environ
+from . models import List, Game
 import requests, os
 from datetime import datetime
 from bs4 import BeautifulSoup
@@ -32,6 +34,10 @@ def game_genres(request):
   game_data = requests.get(url.format(api_key)).json()
   genres = game_data['results']
   return render(request, 'games/genres.html', { 'genres': genres })
+  
+def assoc_game(request, list_id, game_id):
+  List.objects.get(id=list_id).game.add(game_id)
+  return redirect('game_genres', list_id=list_id)
   
 def genre_index(request, genre):
   # games api stuff here
