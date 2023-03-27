@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 import requests, os, environ
+from . models import List, Video_Game
 
 # Create your views here.
 def signup(request):
@@ -32,3 +33,6 @@ def game_genres(request):
   genres = game_data['results']
   return render(request, 'games.html', { 'genres': genres, 'game_data':game_data})
   
+def assoc_game(request, list_id, video_game_id):
+  List.objects.get(id=list_id).video_game.add(video_game_id)
+  return redirect('game_genres', list_id=list_id)
