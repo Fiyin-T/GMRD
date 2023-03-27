@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+
+Genre we are looking at:
+{{ genre|title }}
+
+
+{% for game in games %}
+    <a href="{% url 'game_index' game.id %}">
+        <img src="{{ game.background_image }}" alt="">
+    </a>
+    {{ game.released }}
+    {{ game.name }} 
+    {{ game.id }} <br> <br>
+{% endfor %}
+
+
+
+{% endblock %}
