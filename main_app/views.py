@@ -3,7 +3,9 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-import requests, os, environ
+import requests, os
+from datetime import datetime
+from bs4 import BeautifulSoup
 
 # Create your views here.
 def signup(request):
@@ -29,5 +31,24 @@ def game_genres(request):
   api_key = os.environ.get('API_KEY')
   game_data = requests.get(url.format(api_key)).json()
   genres = game_data['results']
-  return render(request, 'games/genres.html', { 'genres': genres, 'game_data':game_data})
+  return render(request, 'games/genres.html', { 'genres': genres })
+  
+def genre_index(request, genre):
+  # games api stuff here
+  url = 'https://api.rawg.io/api/games?key={}&genres={}'
+  api_key = os.environ.get('API_KEY')
+  game_data = requests.get(url.format(api_key, genre)).json()
+  games = game_data['results']
+  return render(request, 'games/genre_index.html', { 'games': games, 'genre': genre })
+
+def game_index(request, id):
+    url = 'https://api.rawg.io/api/games/{}?key={}'
+    api_key = os.environ.get('API_KEY')
+    game_data = requests.get(url.format(id, api_key)).json()
+    strRelease = game_data['released']
+    release = datetime.strptime(strRelease, '%Y-%m-%d').strftime('%b %dth %Y')
+    descriptionHtml = game_data['description']
+    soup = BeautifulSoup(descriptionHtml, 'html5lib')
+    description = soup.get_text()
+    return render(request, 'games/game_index.html', { 'game': game_data, 'release': release, 'description': description })
   

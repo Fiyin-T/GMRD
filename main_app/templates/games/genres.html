@@ -1,10 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
 
-{{genres}}
-
 {% for genre in genres %}
-    <a href="">
+    {{ genre.name }}
+    <a href="{% url 'genre_index' genre.slug %}">
         <img src="{{ genre.image_background }}" alt="">
     </a>
     {{ genre.id }}
