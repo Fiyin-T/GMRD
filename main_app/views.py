@@ -3,7 +3,6 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-import requests, os, environ
 from . models import List, Game
 import requests, os
 from datetime import datetime
@@ -56,7 +55,8 @@ def game_index(request, id):
     descriptionHtml = game_data['description']
     soup = BeautifulSoup(descriptionHtml, 'html5lib')
     description = soup.get_text()
-    return render(request, 'games/game_index.html', { 'game': game_data, 'release': release, 'description': description })
+    context = { 'game': game_data, 'release': release, 'description': description }
+    return render(request, 'games/game_index.html', context)
 
 
 
