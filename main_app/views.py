@@ -51,4 +51,7 @@ def game_index(request, id):
     soup = BeautifulSoup(descriptionHtml, 'html5lib')
     description = soup.get_text()
     return render(request, 'games/game_index.html', { 'game': game_data, 'release': release, 'description': description })
+
+
+
   

@@ -3,7 +3,6 @@ from django.db import models
 # Create your models here.
 class Video_Game(models.Model):
     title = models.CharField(max_length=100)
-    release_date = models.DateField()
     description = models.CharField(max_length=250)
 
     def __str__(self):
