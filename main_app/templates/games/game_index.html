@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<br>
+
+{{ game.name }} <br><br>
+Release Date: {{ release }} <br><br>
+{{ description }} <br>
+
+<img src="{{ game.background_image_additional }}" alt="">
+
+{% endblock %}
