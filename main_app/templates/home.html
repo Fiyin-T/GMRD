@@ -2,5 +2,12 @@
 {% block content %}
 
 <!-- <h1>GMRD</h1> -->
+<h1> All Lists</h1>
+<h2>
+    {% for list in lists %}
+        <a href="{% url 'list_detail' list.id %}">
+        <p>Name: {{ list.name }}   {{ list.user.username}} </p>
+    {% endfor %}
+</h2>
 
 {% endblock %}

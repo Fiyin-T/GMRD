@@ -7,7 +7,7 @@
 
 {% for games in list.game.all %}
 
-    {{ games }} <a href="">remove</a><br>
+    {{ games }}  <a href="{% url 'unassoc_game' list.id games.id %}">remove</a><br>
 
 {% endfor %}
  <br> 
