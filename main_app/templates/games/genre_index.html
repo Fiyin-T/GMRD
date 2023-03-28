@@ -6,14 +6,28 @@ Genre we are looking at:
 For list: {{ list_id }}
 
 {% for game in games %}
+
+<div class="card" style="width: 18rem;">
     <a href="{% url 'game_index' list_id game.id %}">
-        <img src="{{ game.background_image }}" alt="">
+        <img class="card-img-top" src="{{ game.background_image }}" alt="Card image cap">
     </a>
-    {{ game.released }}
-    {{ game.name }} 
-    {{ game.id }} <br> <br>
+    <div class="card-body">
+      <p class="card-text"></p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">{{ game.released }}</li>
+      <li class="list-group-item">{{ game.name }}</li>
+      <li class="list-group-item">{{ game.id }}</li>
+    </ul>
+  </div>
+  
 {% endfor %}
 
-
-
 {% endblock %}
+<!-- 
+<a href="{% url 'game_index' list_id game.id %}">
+    <img src="{{ game.background_image }}" alt="">
+</a>
+{{ game.released }}
+{{ game.name }} 
+{{ game.id }} <br> <br> -->
