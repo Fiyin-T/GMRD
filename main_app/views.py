@@ -35,9 +35,13 @@ def game_genres(request):
   genres = game_data['results']
   return render(request, 'games/genres.html', { 'genres': genres })
   
-def assoc_game(request, list_id, game_id):
-  List.objects.get(id=list_id).game.add(game_id)
-  return redirect('game_genres', list_id=list_id)
+def assoc_game(request, list_id):
+  title = request.POST['title']
+  release_date = request.POST['release_date']
+  description = request.POST['description']
+  # print(Game.objects.filter(title))
+  # List.objects.get(id=list_id).game.add(game_id)
+  return redirect('game_genres')
   
 def genre_index(request, genre):
   # games api stuff here
@@ -52,11 +56,12 @@ def game_index(request, id):
     api_key = os.environ.get('API_KEY')
     game_data = requests.get(url.format(id, api_key)).json()
     strRelease = game_data['released']
-    release = datetime.strptime(strRelease, '%Y-%m-%d').strftime('%b %dth %Y')
+    release = datetime.strptime(strRelease, '%Y-%m-%d').strftime('%b %d %Y')
     descriptionHtml = game_data['description']
     soup = BeautifulSoup(descriptionHtml, 'html5lib')
     description = soup.get_text()
-    return render(request, 'games/game_index.html', { 'game': game_data, 'release': release, 'description': description })
+    context = { 'game': game_data, 'release': release, 'description': description }
+    return render(request, 'games/game_index.html', context)
 
 class ListCreate(CreateView):
   model = List
