@@ -27,41 +27,50 @@ def signup(request):
 def home(request):
   return render(request, 'home.html')
 
-def game_genres(request):
+def game_genres(request, list_id):
   # games api stuff here
   url = 'https://api.rawg.io/api/genres?key={}'
-  api_key = os.environ.get('API_KEY=4c23650312994d429b5e93b4f7b8b1f5')
+  api_key = os.environ.get('API_KEY')
   game_data = requests.get(url.format(api_key)).json()
   genres = game_data['results']
-  return render(request, 'games/genres.html', { 'genres': genres })
-  
-def assoc_game(request, list_id):
-  title = request.POST['title']
-  release_date = request.POST['release_date']
-  description = request.POST['description']
-  # print(Game.objects.filter(title))
-  # List.objects.get(id=list_id).game.add(game_id)
-  return redirect('game_genres')
-  
-def genre_index(request, genre):
+  return render(request, 'games/genres.html', { 'genres': genres, 'list_id': list_id })
+
+def genre_index(request, list_id, genre):
   # games api stuff here
   url = 'https://api.rawg.io/api/games?key={}&genres={}'
   api_key = os.environ.get('API_KEY')
   game_data = requests.get(url.format(api_key, genre)).json()
   games = game_data['results']
-  return render(request, 'games/genre_index.html', { 'games': games, 'genre': genre })
+  return render(request, 'games/genre_index.html', { 'games': games, 'genre': genre, 'list_id': list_id })
 
-def game_index(request, id):
+def game_index(request, list_id, game_id):
     url = 'https://api.rawg.io/api/games/{}?key={}'
     api_key = os.environ.get('API_KEY')
-    game_data = requests.get(url.format(id, api_key)).json()
+    game_data = requests.get(url.format(game_id, api_key)).json()
     strRelease = game_data['released']
     release = datetime.strptime(strRelease, '%Y-%m-%d').strftime('%b %d %Y')
     descriptionHtml = game_data['description']
     soup = BeautifulSoup(descriptionHtml, 'html5lib')
     description = soup.get_text()
-    context = { 'game': game_data, 'release': release, 'description': description }
+    context = { 'game': game_data, 'release': release, 'description': description, 'list_id': list_id}
     return render(request, 'games/game_index.html', context)
+
+def assoc_game(request, list_id):
+  title = request.POST['title']
+  list = List.objects.get(id=list_id)
+  if (Game.objects.filter(title=title)):
+    # grab the instance of the game that exists in the database
+    game = Game.objects.get(title=title)
+  else:
+    # add the game to the database and grab the new item
+    game = Game.objects.create(
+      title = request.POST['title'],
+      release_date = datetime.strptime(request.POST['release_date'], '%b %d %Y'),
+      description = request.POST['description'],
+    )
+  # associate the game to the list
+  list.game.add(game.id)
+  return redirect('list_detail', list_id=list_id )
 
 class ListCreate(CreateView):
   model = List

@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
-
+{{ list_id }}
+{{ game.id }}
 <br>
 
 {{ game.name }} <br><br>
@@ -9,7 +10,7 @@ Release Date: {{ release }} <br><br>
 
 <!-- need to keep track of the list_id through searching genres + games so 
     that we can pass it to the assoc_game view function -->
-<form action="{% url 'assoc_game'  %}" method="POST">
+<form action="{% url 'assoc_game' list_id %}" method="POST">
     {% csrf_token %}
     <input type="hidden" name="title" value="{{ game.name }}">
     <input type="hidden" name="release_date" value="{{ release }}">
