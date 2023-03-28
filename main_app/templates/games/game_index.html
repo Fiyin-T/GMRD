@@ -7,7 +7,9 @@
 Release Date: {{ release }} <br><br>
 {{ description }} <br> <br>
 
-<form action="" method="POST">
+<!-- need to keep track of the list_id through searching genres + games so 
+    that we can pass it to the assoc_game view function -->
+<form action="{% url 'assoc_game'  %}" method="POST">
     {% csrf_token %}
     <input type="hidden" name="title" value="{{ game.name }}">
     <input type="hidden" name="release_date" value="{{ release }}">
