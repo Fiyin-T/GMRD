@@ -3,4 +3,16 @@
 
 <h1>Games List</h1>
 
+{{ list.name }} <br> <br>
+
+{% for games in list.game.all %}
+
+    {{ games }} <a href="">remove</a><br>
+
+{% endfor %}
+ <br> 
+
+<a href="{% url 'game_genres' list.id %}">add game</a>
+<br>
+
 {% endblock %}

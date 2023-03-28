@@ -17,3 +17,6 @@ class List(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     # M:M relationship
     game = models.ManyToManyField(Game)
+    
+    def __str__(self):
+        return self.name
