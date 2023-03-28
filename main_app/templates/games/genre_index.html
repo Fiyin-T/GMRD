@@ -5,10 +5,10 @@ Genre we are looking at:
 {{ genre|title }}
 
 <div class="card-columns">
-    {% for genre in genres %}
+    {% for game in games %}
     
     <div class="card" style="width: 18rem;">
-        <a href="{% url 'game_index' game.id %}">
+      <a href="{% url 'game_index' list_id game.id %}">
             <img class="card-img-top" src="{{ game.background_image }}" alt="Card image cap">
         </a>
         <div class="card-body">
