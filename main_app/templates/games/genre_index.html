@@ -3,10 +3,10 @@
 
 Genre we are looking at:
 {{ genre|title }}
-
+For list: {{ list_id }}
 
 {% for game in games %}
-    <a href="{% url 'game_index' game.id %}">
+    <a href="{% url 'game_index' list_id game.id %}">
         <img src="{{ game.background_image }}" alt="">
     </a>
     {{ game.released }}
