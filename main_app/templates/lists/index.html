@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% for list in lists %}
+    <a href="{% url 'list_detail' list.id %}">
+    <p>Name: {{ list.name }}   {{ list.date_created }} </p>
+{% endfor %}
+
+{% endblock %}
