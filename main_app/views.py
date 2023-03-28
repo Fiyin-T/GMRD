@@ -7,6 +7,7 @@ from . models import List, Game
 import requests, os
 from datetime import datetime
 from bs4 import BeautifulSoup
+from django.views.generic.edit import CreateView
 
 # Create your views here.
 def signup(request):
@@ -62,6 +63,15 @@ def game_index(request, id):
     context = { 'game': game_data, 'release': release, 'description': description }
     return render(request, 'games/game_index.html', context)
 
+class ListCreate(CreateView):
+  model = List
+  fields = ['name', 'date_created', 'user']
+  success_url = '/lists/'
 
+def lists_index(request):
+  lists = List.objects.all()
+  return render(request, 'lists/index.html', { 'lists': lists })
 
-  
+def lists_detail(request, list_id):
+  list = List.objects.get(id=list_id)
+  return render(request, 'lists/list_detail.html', { 'list': list })
