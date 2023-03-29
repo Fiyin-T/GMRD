@@ -7,7 +7,7 @@ from . models import List, Game
 import requests, os
 from datetime import datetime
 from bs4 import BeautifulSoup
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 # Create your views here.
 def signup(request):
@@ -51,9 +51,10 @@ def game_index(request, list_id, game_id):
     strRelease = game_data['released']
     release = datetime.strptime(strRelease, '%Y-%m-%d').strftime('%b %d %Y')
     descriptionHtml = game_data['description']
+    screenshot = game_data['background_image']
     soup = BeautifulSoup(descriptionHtml, 'html5lib')
     description = soup.get_text()
-    context = { 'game': game_data, 'release': release, 'description': description, 'list_id': list_id}
+    context = { 'game': game_data, 'release': release, 'description': description, 'list_id': list_id, 'screenshot': screenshot}
     return render(request, 'games/game_index.html', context)
 
 def assoc_game(request, list_id):
@@ -68,6 +69,7 @@ def assoc_game(request, list_id):
       title = request.POST['title'],
       release_date = datetime.strptime(request.POST['release_date'], '%b %d %Y'),
       description = request.POST['description'],
+      screenshot_url = request.POST['screenshot']
     )
   # associate the game to the list
   list.game.add(game.id)
@@ -93,3 +95,12 @@ def lists_index(request):
 def lists_detail(request, list_id):
   list = List.objects.get(id=list_id)
   return render(request, 'lists/list_detail.html', { 'list': list })
+
+class ListDelete(LoginRequiredMixin, DeleteView):
+  model = List
+  success_url = '/lists/'
+
+class ListUpdate(LoginRequiredMixin, UpdateView):
+  model = List
+  fields = ['name']
+

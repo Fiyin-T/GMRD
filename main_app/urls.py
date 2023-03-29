@@ -10,6 +10,8 @@ urlpatterns = [
     path('lists/', views.lists_index, name='index'),
     path('lists/create/', views.ListCreate.as_view(), name='lists_create'),
     path('lists/<int:list_id>/', views.lists_detail, name='list_detail'),
+    path('lists/<int:pk>/delete', views.ListDelete.as_view(), name='list_delete'),
+    path('list/<int:pk>/edit', views.ListUpdate.as_view(), name='list_edit'),
     
     # query through api to find game
     path('lists/<int:list_id>/games/genres/', views.game_genres, name='game_genres'),
