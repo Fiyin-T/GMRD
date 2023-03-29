@@ -8,9 +8,23 @@ body {
 }
 
 h1 {
-    color: red;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    top: 10px;
 }
 
-input {
+.card {
+    display: inline-block;
+    width: 18rem; 
+    height: 6rem;
+}
+
+a {
+    text-decoration: none;
     color: white;
+}
+
+a:hover {
+    color: purple;
 }

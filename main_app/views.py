@@ -77,10 +77,14 @@ def unassoc_game(request, list_id, game_id):
   List.objects.get(id=list_id).game.remove(game_id)
   return redirect('list_detail', list_id=list_id )
 
-class ListCreate(CreateView):
+class ListCreate(LoginRequiredMixin, CreateView):
   model = List
-  fields = ['name', 'date_created', 'user']
+  fields = ['name', 'date_created']
   success_url = '/lists/'
+
+  def form_valid(self, form):
+    form.instance.user = self.request.user
+    return super().form_valid(form)
 
 def lists_index(request):
   lists = List.objects.filter(user = request.user)

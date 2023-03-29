@@ -1,18 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Games List</h1>
-
-{{ list.name }} <br> <br>
-
-{% for games in list.game.all %}
-
-    {{ games }}  <a href="{% url 'unassoc_game' list.id games.id %}">remove</a><br>
-
-{% endfor %}
- <br> 
-
-<a href="{% url 'game_genres' list.id %}">add game</a>
+<h1>{{ list.name }}</h1>
 <br>
+
+<div class="container">
+    {% for games in list.game.all %}
+    
+        {{ games }}  <a href="{% url 'unassoc_game' list.id games.id %}">remove</a><br>
+    
+    {% endfor %}
+     <br> 
+    
+    <a href="{% url 'game_genres' list.id %}">add game</a>
+    <br>
+</div>
 
 {% endblock %}
