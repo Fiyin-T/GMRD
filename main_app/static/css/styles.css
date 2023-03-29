@@ -28,3 +28,7 @@ a {
 a:hover {
     color: purple;
 }
+
+input {
+    color: black;
+}
