@@ -57,6 +57,7 @@ def game_index(request, list_id, game_id):
     context = { 'game': game_data, 'release': release, 'description': description, 'list_id': list_id, 'screenshot': screenshot}
     return render(request, 'games/game_index.html', context)
 
+@login_required
 def assoc_game(request, list_id):
   title = request.POST['title']
   list = List.objects.get(id=list_id)
@@ -75,6 +76,7 @@ def assoc_game(request, list_id):
   list.game.add(game.id)
   return redirect('list_detail', list_id=list_id )
 
+@login_required
 def unassoc_game(request, list_id, game_id):
   List.objects.get(id=list_id).game.remove(game_id)
   return redirect('list_detail', list_id=list_id )
@@ -88,10 +90,12 @@ class ListCreate(LoginRequiredMixin, CreateView):
     form.instance.user = self.request.user
     return super().form_valid(form)
 
+@login_required
 def lists_index(request):
   lists = List.objects.filter(user = request.user)
   return render(request, 'lists/index.html', { 'lists': lists })
 
+@login_required
 def lists_detail(request, list_id):
   list = List.objects.get(id=list_id)
   return render(request, 'lists/list_detail.html', { 'list': list })
