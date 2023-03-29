@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
 
-Genre we are looking at:
-{{ genre|title }}
-
+<h3>
+  {{ genre|title }}
+</h3>
 <div class="card-columns container">
     {% for game in games %}
     
-    <div class="card" style="width: 18rem;">
+    <div class="card m3" style="width: 18rem;">
       <a href="{% url 'game_index' list_id game.id %}">
             <img class="card-img-top" src="{{ game.background_image }}" alt="Card image cap">
         </a>
