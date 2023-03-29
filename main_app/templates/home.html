@@ -1,13 +1,18 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<!-- <h1>GMRD</h1> -->
-<h1> All Lists</h1>
-<h2>
+<div class="container">
+    <h1> All Lists</h1>
     {% for list in lists %}
-        <a href="{% url 'list_detail' list.id %}">
-        <p>Name: {{ list.name }}   {{ list.user.username}} </p>
+        <div class="card m-3 text-white bg-dark mb-3">
+            <a href="{% url 'list_detail' list.id %}">
+                <div class="card-body">
+                <h5 class="card-title text-center">{{ list.name }}</h5>
+                <p class="card-text ">By: &nbsp  {{ list.user.username}} </p>
+                </div>
+            </a>
+        </div>
     {% endfor %}
-</h2>
+</div>
 
 {% endblock %}
