@@ -8,6 +8,7 @@ import requests, os
 from datetime import datetime
 from bs4 import BeautifulSoup
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.contrib.auth.models import User
 
 # Create your views here.
 def signup(request):
