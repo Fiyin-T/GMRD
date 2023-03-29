@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
+
 <div class="card-columns container" style="margin: 0 auto;">
 {% for genre in genres %}
 <div class="card" style="width: 18rem;">
@@ -9,9 +10,12 @@
     </a>
     <div class="card-body">
         <h6 class="card-title"> {{ genre.name }} </h6>
+        <p class="card-text">{{ genre.id }}</p>
     </div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">{{ genre.slug }}</li>
+
+   
     </ul>
   </div>
 {% endfor %}

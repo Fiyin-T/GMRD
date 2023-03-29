@@ -10,12 +10,17 @@
         {{ games.release_date }}
         {{ games.screenshot_url }}
     
-        {{ games }}  <a href="{% url 'unassoc_game' list.id games.id %}">remove</a><br>
+        {% if list.user == request.user %}
+      <a href="{% url 'unassoc_game' list.id games.id %}">remove</a><br>
+        {% endif %}
+       
     
     {% endfor %}
      <br> 
-    
-    <a href="{% url 'game_genres' list.id %}">add game</a>
+     {% if list.user == request.user %}
+     <a href="{% url 'game_genres' list.id %}">add game</a>
+     {% endif %}
+
     <br>
 </div>
 
