@@ -64,3 +64,14 @@ h3 {
 .red-text{
     color: red;
 }
+
+.api {
+    width: 100%;
+}
+
+.btn-success {
+    display: flex;
+    justify-content: center;
+    width: 35%;
+    margin: auto;
+}
