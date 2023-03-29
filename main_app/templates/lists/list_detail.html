@@ -6,6 +6,9 @@
 
 <div class="container">
     {% for games in list.game.all %}
+        {{ games.title }}
+        {{ games.release_date }}
+        {{ games.screenshot_url }}
     
         {{ games }}  <a href="{% url 'unassoc_game' list.id games.id %}">remove</a><br>
     
