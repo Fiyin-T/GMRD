@@ -20,7 +20,8 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=100)),
                 ('release_date', models.DateField()),
-                ('description', models.CharField(max_length=2000)),
+                ('description', models.CharField(max_length=5000)),
+                ('screenshot_url', models.CharField(max_length=500)),
             ],
         ),
         migrations.CreateModel(

@@ -1,11 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Delete List</h1>
-<form action="" method="POST">
-    {% csrf_token %}
-    <input type="submit" value="Confirm" class="btn btn-danger text-light">
-    <a href="{% url 'index' %}" class="btn btn-caution text-light">Cancel</a>
-</form>
+<br>
+
+
+<div class="container">
+    <h3>Are you sure you want to delete your list?</h3>
+    <form action="" method="POST" class="add-edit confirm">
+        {% csrf_token %}
+        <input type="submit" value="Confirm" class="btn btn-danger text-light">
+        <a href="{% url 'index' %}" class="btn btn-secondary text-light">Cancel</a>
+    </form>
+</div>
 
 {% endblock %}
