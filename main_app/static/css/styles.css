@@ -12,5 +12,9 @@ h1 {
 }
 
 input {
-    color: white;
+    color: black;
+}
+
+.card {
+    display: inline-block;
 }
