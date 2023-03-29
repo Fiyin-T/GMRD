@@ -25,7 +25,8 @@ def signup(request):
   return render(request, 'registration/signup.html', context)
 
 def home(request):
-  return render(request, 'home.html')
+  lists = List.objects.all()
+  return render(request, 'home.html', { 'lists': lists })
 
 def game_genres(request, list_id):
   # games api stuff here
@@ -72,13 +73,21 @@ def assoc_game(request, list_id):
   list.game.add(game.id)
   return redirect('list_detail', list_id=list_id )
 
-class ListCreate(CreateView):
+def unassoc_game(request, list_id, game_id):
+  List.objects.get(id=list_id).game.remove(game_id)
+  return redirect('list_detail', list_id=list_id )
+
+class ListCreate(LoginRequiredMixin, CreateView):
   model = List
-  fields = ['name', 'date_created', 'user']
+  fields = ['name', 'date_created']
   success_url = '/lists/'
 
+  def form_valid(self, form):
+    form.instance.user = self.request.user
+    return super().form_valid(form)
+
 def lists_index(request):
-  lists = List.objects.all()
+  lists = List.objects.filter(user = request.user)
   return render(request, 'lists/index.html', { 'lists': lists })
 
 def lists_detail(request, list_id):

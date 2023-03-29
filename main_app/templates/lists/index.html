@@ -1,9 +1,22 @@
 {% extends 'base.html' %}
 {% block content %}
 
-{% for list in lists %}
-    <a href="{% url 'list_detail' list.id %}">
-    <p>Name: {{ list.name }}   {{ list.date_created }} </p>
-{% endfor %}
+<div class="container">
+    <h1> My Lists</h1>
+    {% for list in lists %}
+    <div class="card m-3 text-white bg-dark mb-3" style="height: 9rem;">
+            <a href="{% url 'list_detail' list.id %}">
+                <div class="card-body">
+                    <h5 class="card-title text-center">{{ list.name }}</h5>
+                    <p class="card-text ">Date Created: &nbsp  {{ list.date_created}} </p>
+                </div>
+            </a>
+            <div class="card-footer">
+                <a href="" class="btn btn-info text-light">Edit</a>
+                <a href="" class="btn btn-danger text-light">Delete</a>
+            </div>
+        </div>
+    {% endfor %}
+</div>
 
 {% endblock %}
