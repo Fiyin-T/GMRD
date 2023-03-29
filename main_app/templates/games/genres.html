@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 List ID: {{ list_id }}
+
 <br>
 <div class="card-columns">
 {% for genre in genres %}
@@ -20,4 +21,5 @@ List ID: {{ list_id }}
   </div>
 {% endfor %}
 </div>
+
 {% endblock %}
