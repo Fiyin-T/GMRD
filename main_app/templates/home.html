@@ -4,7 +4,7 @@
 <div class="container">
     <h1> All Lists</h1>
     {% for list in lists %}
-        <div class="card m-3 text-white bg-dark mb-3">
+        <div class="card m-3 text-white bg-dark mb-3" style="width: 18rem;">
             <a href="{% url 'list_detail' list.id %}">
                 <div class="card-body">
                 <h5 class="card-title text-center">{{ list.name }}</h5>
