@@ -16,7 +16,7 @@ h1 {
 
 .card {
     display: inline-block;
-    width: 18rem; 
+    width: 18rem;
     height: 6rem;
 }
 
@@ -31,4 +31,29 @@ a:hover {
 
 input {
     color: black;
+}
+
+.add-edit {
+    width: 35%;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+}
+
+h3 {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.confirm {
+    justify-content: space-evenly;
+}
+
+.signup {
+    width: 65%;
+}
+
+.red-text{
+    color: red;
 }
