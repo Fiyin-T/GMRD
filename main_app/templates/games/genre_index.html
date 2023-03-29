@@ -7,7 +7,7 @@ Genre we are looking at:
 <div class="card-columns container">
     {% for game in games %}
     
-    <div class="card" style="width: 18rem; height:30rem;">
+    <div class="card" style="width: 18rem;">
       <a href="{% url 'game_index' list_id game.id %}">
             <img class="card-img-top" src="{{ game.background_image }}" alt="Card image cap">
         </a>
