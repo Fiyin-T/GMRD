@@ -1,14 +1,22 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<br>
+
 <div class="container">
-    Create New List
+    {% if object %}
+        <h3>Edit List Name</h3>
+    {% else %}
+        <h3>Create New List</h3>
+    {% endif %}
     <form action="" method="POST">
         {% csrf_token %}
-        <table>
-            {{ form.as_table }}
+        <table class="add-edit form-control mb-3 col-xs-2">
+            <div class="mb-3 create">
+                {{ form.as_table }}
+            </div>
         </table>
-        <input type="submit" value="Submit" class="btn">
+        <input type="submit" value="Submit" class="add-edit btn btn-info text-light">
     </form>
 </div>
 

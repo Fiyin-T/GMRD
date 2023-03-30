@@ -6,18 +6,21 @@
 
 <div class="container">
     {% for games in list.game.all %}
-        <div class="card" style="width: 18rem;">
-            <a href="{% url 'game_detail' games.id %}">
-            <img src="{{ games.screenshot_url }}" class="card-img-top" alt="...">
-            <div class="card-body">
-            <p class="card-text list-text">Title: {{ games.title }}  Release Date: {{ games.release_date }}</p><br>
-            </a>
-            <a class="btn btn-primary" href="{% url 'unassoc_game' list.id games.id %}" role="button">Remove</a><br>
-        </div>
-    {% endfor %}
-    <br><br>
-    <a class="btn btn-primary" href="{% url 'game_genres' list.id %}">Add Game</a>
+        {{ games.title }}
+        {{ games.release_date }}
+        {{ games.screenshot_url }}
     
+        {% if list.user == request.user %}
+      <a href="{% url 'unassoc_game' list.id games.id %}">remove</a><br>
+        {% endif %}
+       
+    
+    {% endfor %}
+     <br> 
+     {% if list.user == request.user %}
+     <a href="{% url 'game_genres' list.id %}">add game</a>
+     {% endif %}
+
     <br>
 </div>
 

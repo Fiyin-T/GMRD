@@ -8,6 +8,7 @@ import requests, os
 from datetime import datetime
 from bs4 import BeautifulSoup
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.contrib.auth.models import User
 
 # Create your views here.
 def signup(request):
@@ -58,6 +59,7 @@ def game_index(request, list_id, game_id):
     context = { 'game': game_data, 'release': release, 'description': description, 'list_id': list_id, 'screenshot': screenshot, 'name': name}
     return render(request, 'games/game_index.html', context)
 
+@login_required
 def assoc_game(request, list_id):
   title = request.POST['title']
   list = List.objects.get(id=list_id)
@@ -76,6 +78,7 @@ def assoc_game(request, list_id):
   list.game.add(game.id)
   return redirect('list_detail', list_id=list_id )
 
+@login_required
 def unassoc_game(request, list_id, game_id):
   List.objects.get(id=list_id).game.remove(game_id)
   return redirect('list_detail', list_id=list_id )
@@ -89,10 +92,12 @@ class ListCreate(LoginRequiredMixin, CreateView):
     form.instance.user = self.request.user
     return super().form_valid(form)
 
+@login_required
 def lists_index(request):
   lists = List.objects.filter(user = request.user)
   return render(request, 'lists/index.html', { 'lists': lists })
 
+@login_required
 def lists_detail(request, list_id):
   list = List.objects.get(id=list_id)
   return render(request, 'lists/list_detail.html', { 'list': list })
@@ -108,3 +113,12 @@ class ListUpdate(LoginRequiredMixin, UpdateView):
 def game_detail(request, game_id):
   list_game = Game.objects.get(id=game_id)
   return render(request, 'games/game_detail.html', {'list_game': list_game })
+
+def search(request, list_id):
+  # games api search
+  # url = 'https://api.rawg.io/api/games?key={}&search={}'
+  print(request.GET)
+  api_key = os.environ.get('API_KEY')
+  # game_data = requests.get(url.format(api_key, genre)).json()
+  # games = game_data['results']
+  return render(request, 'games/search.html', { 'title': "This is a title" } )
