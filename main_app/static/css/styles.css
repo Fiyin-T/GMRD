@@ -75,3 +75,9 @@ h3 {
     width: 35%;
     margin: auto;
 }
+
+.search {
+    width: 50%;
+    /* justify-content: center;
+    align-items: center; */
+}

@@ -1,22 +1,26 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<div class="container" style="width: 50%">
+  <form action="{% url 'search' list_id %}" method="GET">
+    <div class="input-group m-3">
+      <div class="input-group-prepend">
+        <button class="btn btn-outline-warning" type="submit">GO!</button>
+      </div>
+      <input type="text" class="form-control search" placeholder="search for a game">
+    </div>
+  </form>
+</div>
 
 <div class="card-columns container" style="margin: 0 auto;">
 {% for genre in genres %}
-<div class="card" style="width: 18rem;">
+<div class="card m-3" style="width: 18rem; height: 22rem">
     <a href="{% url 'genre_index' list_id genre.slug %}">
         <img class="card-img-top" src="{{ genre.image_background }}" alt="">
     </a>
     <div class="card-body">
-        <h6 class="card-title"> {{ genre.name }} </h6>
-        <p class="card-text">{{ genre.id }}</p>
+        <h5 class="card-title"> {{ genre.name }} </h5>
     </div>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">{{ genre.slug }}</li>
-
-   
-    </ul>
   </div>
 {% endfor %}
 </div>
