@@ -19,4 +19,6 @@ urlpatterns = [
     path('lists/<int:list_id>/games/<int:game_id>/', views.game_index, name='game_index'),
     path('list/<int:list_id>/assoc_game/', views.assoc_game, name='assoc_game'),
     path('list/<int:list_id>/unassoc_game/<int:game_id>/', views.unassoc_game, name='unassoc_game'),
+    # Game URLs
+    path('games/<int:game_id>/', views.game_detail, name='game_detail'),
 ]
