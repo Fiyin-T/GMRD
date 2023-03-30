@@ -2,7 +2,22 @@
 {% block content %}
 
 <h3>
-  {{ title }}
+    search: {{ search }}
 </h3>
+
+<div class="card-columns container" style="margin: 0 auto;">
+    {% for game in games %}
+    <div class="card m-3" style="width: 18rem; height: 22rem">
+        <a href="{% url 'game_index' list_id game.id %}">
+            <img class="card-img-top" src="{{ game.background_image }}" alt="">
+        </a>
+        <div class="card-body">
+            <h5 class="card-title"> {{ game.name }} </h5>
+        </div>
+    </div>
+
+    {% endfor %}
+</div>
+    
 
 {% endblock %}

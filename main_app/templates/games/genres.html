@@ -2,12 +2,13 @@
 {% block content %}
 
 <div class="container" style="width: 50%">
-  <form action="{% url 'search' list_id %}" method="GET">
+  <form action="{% url 'search' list_id %}" method="POST">
+    {% csrf_token %}
     <div class="input-group m-3">
       <div class="input-group-prepend">
         <button class="btn btn-outline-warning" type="submit">GO!</button>
       </div>
-      <input type="text" class="form-control search" placeholder="search for a game">
+      <input name="search" type="text" class="form-control search" placeholder="search for a game">
     </div>
   </form>
 </div>

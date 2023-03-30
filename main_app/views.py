@@ -116,9 +116,10 @@ def game_detail(request, game_id):
 
 def search(request, list_id):
   # games api search
-  # url = 'https://api.rawg.io/api/games?key={}&search={}'
-  print(request.GET)
+  url = 'https://api.rawg.io/api/games?key={}&search={}'
+  search_raw = request.POST['search']
+  search = search_raw.replace(' ', '-')
   api_key = os.environ.get('API_KEY')
-  # game_data = requests.get(url.format(api_key, genre)).json()
-  # games = game_data['results']
-  return render(request, 'games/search.html', { 'title': "This is a title" } )
+  game_data = requests.get(url.format(api_key, search)).json()
+  games = game_data['results']
+  return render(request, 'games/search.html', { 'search': search_raw, 'games': games, 'list_id': list_id } )
