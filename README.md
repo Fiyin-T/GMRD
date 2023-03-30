@@ -1,27 +1,31 @@
-# App Title: Contains a description of what the app does and optional background info.
-### GMRD is a site where you and your friends can create lists of games.
+# App Title and Description:
+
+### GMRD is a site where you and your friends can create lists of games. Users are able to edit and remove games from their lists.
+### The GMRD app was created and designed by: Nicole Chan, Michael Lucky and Folu Tokode.
 
 
 
 
-# Screenshot(s): A screenshot of your app's landing page and any other screenshots of interest.
-![alt text]()
-![alt text]()
-![alt text]()
-![alt text]()
-![alt text]()
+# Screenshots:
 
-# Technologies Used: List of the technologies used.
-### Meower was built using HTML, JavaScript, CSS, Bootstrap, DjangoDB,Heroku.
+![alt text](/main_app/static/images/GMRDHome.png)
+![alt text](/main_app/static/images/Createlist.png)
+![alt text](/main_app/static/images/GameGenres.png)
+![alt text](/main_app/static/images/GamesInGenre.png)
+
+# Technologies Used:
+
+### GMRD was built using HTML, CSS, Bootstrap, Django, Heroku, Postgress, bit.io, Python.
 
 
 
-# Getting Started: Include a link to the deployed app and your Trello board with the project's planning.
+# Getting Started:
+
 ### Trello link: [https://trello.com/b/x5M0tw4Z/sei-project-3]
 ### GMRD: [https://gmrd-app.herokuapp.com/]
 
 
-# Next Steps: Planned future enhancements (icebox items).
+# Next Steps:
+
 ### Like/dislike posts/comments
 ### Looking at game detail all the games on one page and adding it to the list 
-### Search other games based on tag names
