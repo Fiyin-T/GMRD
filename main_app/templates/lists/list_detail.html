@@ -4,18 +4,29 @@
 <h1>{{ list.name }}</h1>
 <br>
 
-<div class="container">
+<div class=" card-columns container">
     {% for games in list.game.all %}
-        {{ games.title }}
-        {{ games.release_date }}
-        {{ games.screenshot_url }}
-    
-        {% if list.user == request.user %}
-      <a href="{% url 'unassoc_game' list.id games.id %}">remove</a><br>
-        {% endif %}
+
+    <div class="card m3" style="width: 18rem;">
+      <h6 class="card-title">{{ games.title }}</h6>
+      <a href="{% url 'game_detail' games.id %}">
+            <img class="card-img-top" src="{{ games.screenshot_url }}">
+        </a>
+        <div class="card-body">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">{{ games.release_date }}</li>
+            <li class="list-group-item">
+              {% if list.user == request.user %}
+              <a style="color: black;" href="{% url 'unassoc_game' list.id games.id %}">remove</a><br>
+              {% endif %}
+            </li>
+          </ul>
+        </div>
        
-    
+      </div>
+
     {% endfor %}
+       
      <br> 
      {% if list.user == request.user %}
      <a href="{% url 'game_genres' list.id %}">add game</a>
@@ -25,3 +36,4 @@
 </div>
 
 {% endblock %}
+

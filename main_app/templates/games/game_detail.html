@@ -1,10 +1,20 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <img src="{{ list_game.screenshot_url }}" alt="" class="api rounded float-left">
+        </div>
+        <div class="col-sm">
 
-{{ list_game.title }}
-Release Date: {{ list_game.release_date }}
-{{ list_game.description }}
-
+            <h5> {{ list_game.title }} </h5>
+            <p><i> Release Date: {{ list_game.release_date }} </i></p>
+            <p>{{ list_game.description }}</p>
+        </div>
+    </div>
+    <br>
+</div>
 
 {% endblock %}
