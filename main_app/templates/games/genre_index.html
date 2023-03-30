@@ -7,21 +7,17 @@
 <div class="card-columns container">
     {% for game in games %}
     
-    <div class="card m3" style="width: 18rem;">
+    <div class="card m-3" style="width: 18rem;">
       <a href="{% url 'game_index' list_id game.id %}">
             <img class="card-img-top" src="{{ game.background_image }}" alt="Card image cap">
         </a>
         <div class="card-body">
           <h6 class="card-title">{{ game.name }}</h6>
         </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">{{ game.released }}</li>
-          <li class="list-group-item"></li>
-        </ul>
       </div>
     
     {% endfor %}
     
-    </div>
+</div>
 
 {% endblock %}
