@@ -1,27 +1,31 @@
 {% extends 'base.html' %}
 {% block content %}
-{{ list_id }}
-{{ game.id }}
+
 <br>
-
-{{ game.name }} <br><br>
-Release Date: {{ release }} <br><br>
-{{ description }} <br> <br>
-
-<!-- need to keep track of the list_id through searching genres + games so 
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <img src="{{ game.background_image_additional }}" alt="" class="api rounded float-left">
+        </div>
+        <div class="col-sm">
+            <h5> {{ game.name }} </h5>
+            <p><i> Release Date: {{ release }} </i></p>
+            <p>{{ description }}</p>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+    <!-- need to keep track of the list_id through searching genres + games so 
     that we can pass it to the assoc_game view function -->
-<form action="{% url 'assoc_game' list_id %}" method="POST">
-    {% csrf_token %}
-    <input type="hidden" name="title" value="{{ game.name }}">
-    <input type="hidden" name="release_date" value="{{ release }}">
-    <input type="hidden" name="description" value="{{ description }}">
-    <input type="hidden" name="screenshot" value="{{ screenshot }}">
-    <input type="submit" value="Add to List">
-</form>
-
-
-<img src="{{ game.background_image_additional }}" alt="">
-
-
+        <form action="{% url 'assoc_game' list_id %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="title" value="{{ game.name }}">
+            <input type="hidden" name="release_date" value="{{ release }}">
+            <input type="hidden" name="description" value="{{ description }}">
+            <input type="hidden" name="screenshot" value="{{ screenshot }}">
+            <input type="submit" value="Add to List" class="btn btn-success text-light">
+        </form>
+    </div>
+</div>
 
 {% endblock %}
