@@ -55,7 +55,8 @@ def game_index(request, list_id, game_id):
     screenshot = game_data['background_image']
     soup = BeautifulSoup(descriptionHtml, 'html5lib')
     description = soup.get_text()
-    context = { 'game': game_data, 'release': release, 'description': description, 'list_id': list_id, 'screenshot': screenshot}
+    name = game_data['name']
+    context = { 'game': game_data, 'release': release, 'description': description, 'list_id': list_id, 'screenshot': screenshot, 'name': name}
     return render(request, 'games/game_index.html', context)
 
 @login_required
@@ -108,6 +109,10 @@ class ListDelete(LoginRequiredMixin, DeleteView):
 class ListUpdate(LoginRequiredMixin, UpdateView):
   model = List
   fields = ['name']
+
+def game_detail(request, game_id):
+  list_game = Game.objects.get(id=game_id)
+  return render(request, 'games/game_detail.html', {'list_game': list_game })
 
 def search(request, list_id):
   # games api search
