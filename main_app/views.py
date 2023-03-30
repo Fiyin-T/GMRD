@@ -29,6 +29,7 @@ def home(request):
   lists = List.objects.all()
   return render(request, 'home.html', { 'lists': lists })
 
+@login_required
 def game_genres(request, list_id):
   # games api stuff here
   url = 'https://api.rawg.io/api/genres?key={}'
@@ -37,6 +38,7 @@ def game_genres(request, list_id):
   genres = game_data['results']
   return render(request, 'games/genres.html', { 'genres': genres, 'list_id': list_id })
 
+@login_required
 def genre_index(request, list_id, genre):
   # games api stuff here
   url = 'https://api.rawg.io/api/games?key={}&genres={}'
@@ -45,6 +47,7 @@ def genre_index(request, list_id, genre):
   games = game_data['results']
   return render(request, 'games/genre_index.html', { 'games': games, 'genre': genre, 'list_id': list_id })
 
+@login_required
 def game_index(request, list_id, game_id):
     url = 'https://api.rawg.io/api/games/{}?key={}'
     api_key = os.environ.get('API_KEY')
@@ -92,12 +95,10 @@ class ListCreate(LoginRequiredMixin, CreateView):
     form.instance.user = self.request.user
     return super().form_valid(form)
 
-@login_required
 def lists_index(request):
   lists = List.objects.filter(user = request.user)
   return render(request, 'lists/index.html', { 'lists': lists })
 
-@login_required
 def lists_detail(request, list_id):
   list = List.objects.get(id=list_id)
   return render(request, 'lists/list_detail.html', { 'list': list })
@@ -114,6 +115,7 @@ def game_detail(request, game_id):
   list_game = Game.objects.get(id=game_id)
   return render(request, 'games/game_detail.html', {'list_game': list_game })
 
+@login_required
 def search(request, list_id):
   # games api search
   url = 'https://api.rawg.io/api/games?key={}&search={}'
